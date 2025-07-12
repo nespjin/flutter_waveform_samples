@@ -155,9 +155,9 @@ class CustomeWaveformState extends State<CustomeWaveform> {
       case PlayerState.playing:
       case PlayerState.paused:
       case PlayerState.stopped:
-        musicProgress = 0;
-        maxDuration = -1;
-        totalWaveWidth = 0;
+        // musicProgress = 0;
+        // maxDuration = -1;
+        // totalWaveWidth = 0;
     }
   }
 
