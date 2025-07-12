@@ -70,6 +70,7 @@ class _AudioWaveformsScreenState extends State<AudioWaveformsScreen> {
                   onPressed: playerController.stopPlayer,
                   child: const Text('Stop'),
                 ),
+                const Text('Builtin waveforms'),
                 AudioFileWaveforms(
                   playerController: playerController,
                   playerWaveStyle: const PlayerWaveStyle(
@@ -79,6 +80,7 @@ class _AudioWaveformsScreenState extends State<AudioWaveformsScreen> {
                   backgroundColor: Colors.grey,
                   size: Size(size.width, 50),
                 ),
+                const Text('Custome waveforms'),
                 CustomeWaveform(
                   playerController: playerController,
                   waveHeight: 50,
@@ -168,15 +170,15 @@ class CustomeWaveformState extends State<CustomeWaveform> {
     musicProgress = duration / maxDuration;
 
     final playedWaveCount = musicProgress * waveformData.length;
-    this.playedWaveCount = playedWaveCount.round();
-    final playedWaveWidth = calculateWaveformWidth(playedWaveCount);
+    this.playedWaveCount = playedWaveCount.round() + 1;
+    final playedWaveWidth = calculateWaveformWidth(playedWaveCount + 1);
     final playedPercent =
         playedWaveWidth / (totalWaveWidth == 0 ? 1 : totalWaveWidth);
     final playedScrollPosition =
         playedPercent * waveformScrollController.position.maxScrollExtent;
     waveformScrollController.animateTo(
       playedScrollPosition,
-      duration: const Duration(milliseconds: 80),
+      duration: const Duration(milliseconds: 500),
       curve: Curves.easeInOut,
     );
     debugPrint('duration: $duration');
