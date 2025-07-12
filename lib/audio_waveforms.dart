@@ -79,12 +79,9 @@ class _AudioWaveformsScreenState extends State<AudioWaveformsScreen> {
                   backgroundColor: Colors.grey,
                   size: Size(size.width, 50),
                 ),
-                DecoratedBox(
-                  decoration: const BoxDecoration(color: Colors.amber),
-                  child: CustomeWaveform(
-                    playerController: playerController,
-                    waveHeight: 50,
-                  ),
+                CustomeWaveform(
+                  playerController: playerController,
+                  waveHeight: 50,
                 ),
               ],
             ),
