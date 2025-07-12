@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:audio_wave/audio_wave.dart';
 import 'package:audio_waveforms/audio_waveforms.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_voice_wave/gen/assets.gen.dart';
@@ -224,6 +225,7 @@ class CustomeWaveformState extends State<CustomeWaveform> {
         children: [
           SingleChildScrollView(
             controller: waveformScrollController,
+            physics: const NeverScrollableScrollPhysics(),
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
