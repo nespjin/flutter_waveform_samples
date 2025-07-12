@@ -157,13 +157,14 @@ class CustomeWaveformState extends State<CustomeWaveform> {
       case PlayerState.playing:
       case PlayerState.paused:
       case PlayerState.stopped:
-        // musicProgress = 0;
-        // maxDuration = -1;
-        // totalWaveWidth = 0;
+      // musicProgress = 0;
+      // maxDuration = -1;
+      // totalWaveWidth = 0;
     }
   }
 
   void _onCurrentDurationChanged(int duration) async {
+    if (duration == 0) return;
     if (maxDuration <= 0) {
       maxDuration = await playerController.getDuration(DurationType.max);
     }
@@ -173,7 +174,8 @@ class CustomeWaveformState extends State<CustomeWaveform> {
     this.playedWaveCount = playedWaveCount.round() + 1;
     final playedWaveWidth = calculateWaveformWidth(playedWaveCount + 1);
     final playedPercent =
-        playedWaveWidth / (totalWaveWidth == 0 ? 1 : totalWaveWidth);
+        (playedWaveWidth / (totalWaveWidth == 0 ? 1 : totalWaveWidth))
+            .clamp(0, 1);
     final playedScrollPosition =
         playedPercent * waveformScrollController.position.maxScrollExtent;
     waveformScrollController.animateTo(
