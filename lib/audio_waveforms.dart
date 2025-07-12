@@ -183,8 +183,8 @@ class CustomeWaveformState extends State<CustomeWaveform> {
       duration: const Duration(milliseconds: 500),
       curve: Curves.easeInOut,
     );
-    debugPrint('duration: $duration');
-    debugPrint('musicProgress: $musicProgress, $playedScrollPosition');
+    // debugPrint('duration: $duration');
+    // debugPrint('musicProgress: $musicProgress, $playedScrollPosition');
 
     if (mounted) setState(() => {});
   }
