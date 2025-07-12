@@ -127,7 +127,7 @@ class CustomeWaveformState extends State<CustomeWaveform> {
 
   double musicProgress = 0;
   int maxDuration = -1;
-  double playedWaveAroundCount = 0;
+  int playedWaveCount = 0;
   double totalWaveWidth = 0;
 
   @override
@@ -167,15 +167,16 @@ class CustomeWaveformState extends State<CustomeWaveform> {
     }
     musicProgress = duration / maxDuration;
 
-    playedWaveAroundCount = musicProgress * waveformData.length;
-    final playedWaveWidth = calculateWaveformWidth(playedWaveAroundCount);
+    final playedWaveCount = musicProgress * waveformData.length;
+    this.playedWaveCount = playedWaveCount.round();
+    final playedWaveWidth = calculateWaveformWidth(playedWaveCount);
     final playedPercent =
         playedWaveWidth / (totalWaveWidth == 0 ? 1 : totalWaveWidth);
     final playedScrollPosition =
         playedPercent * waveformScrollController.position.maxScrollExtent;
     waveformScrollController.animateTo(
       playedScrollPosition,
-      duration: const Duration(milliseconds: 200),
+      duration: const Duration(milliseconds: 80),
       curve: Curves.easeInOut,
     );
     debugPrint('duration: $duration');
@@ -230,7 +231,7 @@ class CustomeWaveformState extends State<CustomeWaveform> {
                       // debugPrint('wave form data: $data');
                       return AudioWaveBar(
                         heightFactor: (data * 4).clamp(0, 1),
-                        color: index < playedWaveAroundCount
+                        color: index < playedWaveCount
                             ? playedWaveColor
                             : waveColor,
                       );
