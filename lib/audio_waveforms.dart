@@ -30,10 +30,8 @@ class _AudioWaveformsScreenState extends State<AudioWaveformsScreen> {
     audioFilePath =
         path.join((await getTemporaryDirectory()).path, 'audio.mp3');
     final audioFile = File(audioFilePath);
-    if (!await audioFile.exists()) {
-      await audioFile.writeAsBytes(
-          (await rootBundle.load(Assets.audio.zhouYq)).buffer.asUint8List());
-    }
+    await audioFile.writeAsBytes(
+        (await rootBundle.load(Assets.audio.zhouQhc)).buffer.asUint8List());
     playerController.preparePlayer(path: audioFile.path);
 
     setState(() => _isReady = true);
@@ -131,6 +129,7 @@ class CustomeWaveformState extends State<CustomeWaveform> {
   int maxDuration = -1;
   int playedWaveCount = 0;
   double totalWaveWidth = 0;
+  int lastDuration = -1;
 
   @override
   void initState() {
@@ -178,14 +177,19 @@ class CustomeWaveformState extends State<CustomeWaveform> {
             .clamp(0, 1);
     final playedScrollPosition =
         playedPercent * waveformScrollController.position.maxScrollExtent;
-    waveformScrollController.animateTo(
-      playedScrollPosition,
-      duration: const Duration(milliseconds: 500),
-      curve: Curves.easeInOut,
-    );
-    // debugPrint('duration: $duration');
+    if ((duration - lastDuration).abs() < 500) {
+      waveformScrollController.animateTo(
+        playedScrollPosition,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    } else {
+      waveformScrollController.jumpTo(playedScrollPosition);
+    }
+    // debugPrint('duration: $lastDuration $duration');
     // debugPrint('musicProgress: $musicProgress, $playedScrollPosition');
 
+    lastDuration = duration;
     if (mounted) setState(() => {});
   }
 

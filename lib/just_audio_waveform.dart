@@ -41,10 +41,8 @@ class _JustAudioWaveformScreenState extends State<JustAudioWaveformScreen> {
       final waveOutputFile =
           File(join((await getTemporaryDirectory()).path, 'audio.wave'));
 
-      if (!await audioInFile.exists()) {
-        await audioInFile.writeAsBytes(
-            (await rootBundle.load(Assets.audio.zhouQhc)).buffer.asUint8List());
-      }
+      await audioInFile.writeAsBytes(
+          (await rootBundle.load(Assets.audio.zhouQhc)).buffer.asUint8List());
 
       _progressSubscription = JustWaveform.extract(
         audioInFile: audioInFile,
