@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:audio_wave/audio_wave.dart';
 import 'package:audio_waveforms/audio_waveforms.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_voice_wave/gen/assets.gen.dart';
@@ -79,7 +78,7 @@ class _AudioWaveformsScreenState extends State<AudioWaveformsScreen> {
                   backgroundColor: Colors.grey,
                   size: Size(size.width, 50),
                 ),
-                const Text('Custome waveforms'),
+                const Text('Custom waveforms'),
                 CustomeWaveform(
                   playerController: playerController,
                   waveHeight: 50,
